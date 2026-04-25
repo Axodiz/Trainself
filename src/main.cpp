@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <StateMachine.h>
+
 #include <iostream>
 
 int main(){
@@ -36,13 +38,26 @@ int main(){
 	// load interface library
 	IMGUI_CHECKVERSION();
 
+	// load style and fonts
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	(void)io;
+
+	float fontSizeDefault = 16.0f;
+	ImFont *fontDefault = io.Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault);
+	ImFont *fontTitle = io.Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault * 4);
+
 	ImGui::StyleColorsDark();
 
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
+
+	StateMachine state_machine;
+	state_machine.loadFont(fontTitle, "ProggyClean_Large");
+	state_machine.loadFont(fontDefault, "ProggyClean_Default");
+
+	state_machine.change(STATE_EDITOR);
+	state_machine.change(STATE_MAIN);
 
 	// render loop
 	while(!glfwWindowShouldClose(window)){
@@ -57,10 +72,10 @@ int main(){
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::Begin("Hello, world!");
-		ImGui::Text("This is window Dear ImGui");
-		ImGui::End();
+		// load application state
+		state_machine.update();
 
+		// draw interface and events
 		ImGui::Render();
 		int display_w, display_h;
 		glfwGetFramebufferSize(window, &display_w, &display_h);
