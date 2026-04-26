@@ -15,7 +15,7 @@ else()
 	message("configuration window: DISABLED")
 endif()
 
-if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/glfw/CMakeLists.txt")
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
     message(FATAL_ERROR
 		"Submodules are not initialized. Run: git submodule update --init --recursive"
 	)
