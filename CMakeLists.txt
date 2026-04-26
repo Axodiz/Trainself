@@ -15,6 +15,12 @@ else()
 	message("configuration window: DISABLED")
 endif()
 
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/glfw/CMakeLists.txt")
+    message(FATAL_ERROR
+		"Submodules are not initialized. Run: git submodule update --init --recursive"
+	)
+endif()
+
 add_subdirectory(external/glfw)
 add_subdirectory(external/glad)
 add_subdirectory(external/imgui)
