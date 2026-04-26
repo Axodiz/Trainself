@@ -2,6 +2,7 @@
 #define ISTATE_H
 
 #include <AssetManager.h>
+#include <ProductUI.h>
 
 enum stateType {
 	STATE_MAIN,

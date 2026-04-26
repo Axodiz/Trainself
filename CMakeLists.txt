@@ -28,6 +28,7 @@ add_subdirectory(external/imgui)
 set(SOURCES
 	src/main.cpp
 	src/core/AssetManager.cpp
+	src/core/ProductUI.cpp
 	src/core/StateMachine.cpp
 	src/states/MainState.cpp
 	src/states/EditorState.cpp

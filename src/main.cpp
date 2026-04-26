@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include <StateMachine.h>
+#include <ProductUI.h>
 
 #include <iostream>
 
@@ -35,22 +36,13 @@ int main(){
 		return -1;
 	}
 
-	// load interface library
-	IMGUI_CHECKVERSION();
-
-	// load style and fonts
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	(void)io;
+	UI::loadUI(window);
 
 	float fontSizeDefault = 16.0f;
-	ImFont *fontDefault = io.Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault);
-	ImFont *fontTitle = io.Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault * 4);
+	ImFont *fontDefault = ImGui::GetIO().Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault);
+	ImFont *fontTitle = ImGui::GetIO().Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault * 4);
 
 	ImGui::StyleColorsDark();
-
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init("#version 330");
 
 	StateMachine state_machine;
 	state_machine.loadFont(fontTitle, "ProggyClean_Large");
@@ -68,29 +60,25 @@ int main(){
 			glfwSetWindowShouldClose(window, true);
 		}
 
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
+		UI::newFrame();
 
 		// load application state
 		state_machine.update();
 
 		// draw interface and events
-		ImGui::Render();
 		int display_w, display_h;
 		glfwGetFramebufferSize(window, &display_w, &display_h);
 		glViewport(0, 0, display_w, display_h);
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		UI::render();
 
 		glfwSwapBuffers(window);
 
 	}
 
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
+	UI::shutdownUI();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
