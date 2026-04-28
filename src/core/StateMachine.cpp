@@ -1,11 +1,6 @@
 #include <StateMachine.h>
 #include <iostream>
 
-void StateMachine::loadFont(ImFont *font, std::string name)
-{
-	m_srcMng.loadFont(font, name);
-}
-
 void StateMachine::update()
 {
 	m_currentState->update();
@@ -36,7 +31,7 @@ void StateMachine::changeState(StateType stateType)
 			break;
 		}
 		
-		newState->loadState(stateType, &m_srcMng);
+		newState->loadState(stateType, m_srcMng);
 		m_states[stateType] = newState;
 	}
 

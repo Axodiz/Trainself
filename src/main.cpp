@@ -9,6 +9,7 @@
 
 #include <StateMachine.h>
 #include <ProductUI.h>
+#include <loadSourceManager.h>
 
 
 int main(){
@@ -40,15 +41,9 @@ int main(){
 
 	UI::loadUI(window);
 
-	float fontSizeDefault = 16.0f;
-	ImFont *fontDefault = ImGui::GetIO().Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault);
-	ImFont *fontTitle = ImGui::GetIO().Fonts->AddFontFromFileTTF("fonts/ProggyClean.ttf", fontSizeDefault * 4);
-
 	ImGui::StyleColorsDark();
 
-	StateMachine fsm;
-	fsm.loadFont(fontTitle, "ProggyClean_Large");
-	fsm.loadFont(fontDefault, "ProggyClean_Default");
+	StateMachine fsm(loadSourceManager());
 
 	fsm.changeState(STATE_EDITOR);
 	fsm.changeState(STATE_MAIN);

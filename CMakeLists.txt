@@ -27,6 +27,7 @@ add_subdirectory(external/imgui)
 
 set(SOURCES
 	src/main.cpp
+	src/loadSourceManager.cpp
 	src/core/AssetManager.cpp
 	src/core/ProductUI.cpp
 	src/core/StateMachine.cpp
@@ -56,6 +57,7 @@ target_include_directories(${appName}
    	PRIVATE
    		include
 		include/states
+		include/core
 		fonts
 )
 

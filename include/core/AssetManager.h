@@ -9,11 +9,16 @@
 class AssetManager
 {
 public:
-	AssetManager() = default;
+	AssetManager(const ImGuiIO *io)
+		: m_io(io){};
+
+	void loadFontFromFile(const char *path, float size, std::string name);
 	ImFont *getFont(const std::string &name) const;
-	void loadFont(ImFont *font, std::string name);
 
 private:
+	void loadFont(ImFont *font, std::string name);
+
+	const ImGuiIO *m_io;
 	std::unordered_map<std::string, ImFont *> m_fonts;
 };
 

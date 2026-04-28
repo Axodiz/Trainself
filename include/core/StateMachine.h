@@ -10,15 +10,16 @@
 class StateMachine
 {
 public:
-	StateMachine() = default;
-	void loadFont(ImFont *font, std::string name);
+	StateMachine(const AssetManager *srcMng)
+		: m_srcMng(srcMng){};
+
 	void update();
 	void changeState(StateType stateType);
 
 private:
 	IState *m_currentState = NULL;
 	std::unordered_map<StateType, IState *> m_states;
-	AssetManager m_srcMng;
+	const AssetManager *m_srcMng = NULL;
 };
 
 #endif

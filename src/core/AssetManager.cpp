@@ -11,6 +11,12 @@ ImFont *AssetManager::getFont(const std::string &name) const
 	return NULL;
 }
 
+void AssetManager::loadFontFromFile(const char *path, float size, std::string name)
+{
+	ImFont *font = m_io->Fonts->AddFontFromFileTTF(path, size);
+	loadFont(font, name);
+}
+
 void AssetManager::loadFont(ImFont *font, std::string name)
 {
 	auto it = m_fonts.find(name);
