@@ -12,28 +12,31 @@ void StateMachine::update()
 
 void StateMachine::changeState(StateType stateType)
 {
+	if(m_currentState){
+		m_states[m_currentState->getType()] = std::move(m_currentState);
+	}
+
 	auto it = m_states.find(stateType);
 	if(it == m_states.end()){
 
-		IState *newState;
+		std::unique_ptr<IState> newState;
 		switch(stateType)
 		{
 		case STATE_MAIN:
-			newState = new MainState();
+			newState = std::make_unique<MainState>();
 			break;
 		case STATE_EDITOR:
-			newState = new EditorState();
+			newState = std::make_unique<EditorState>();
 			break;
 		case STATE_DEFAULT:
 		default:
-			newState = NULL;
 			std::cout << "STATE_MACHINE : CHANGE DEFAULT" << std::endl;
 			break;
 		}
 		
 		newState->loadState(stateType, m_srcMng);
-		m_states[stateType] = newState;
+		m_states[stateType] = std::move(newState);
 	}
 
-	m_currentState = m_states[stateType];
+	m_currentState = std::move(m_states[stateType]);
 }

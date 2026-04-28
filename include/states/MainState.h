@@ -7,7 +7,7 @@
 class MainState : public IState
 {
 public:
-	void loadState(StateType newType, const AssetManager *mng) override;
+	void loadState(StateType newType, std::shared_ptr<AssetManager> srcMng) override;
 	void update() override;
 	
 private:

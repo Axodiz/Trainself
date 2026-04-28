@@ -2,6 +2,7 @@
 #define STATEMACHINE_H
 
 #include <unordered_map>
+#include <memory>
 
 #include <IState.h>
 #include <MainState.h>
@@ -10,16 +11,15 @@
 class StateMachine
 {
 public:
-	StateMachine(const AssetManager *srcMng)
-		: m_srcMng(srcMng){};
+	StateMachine(std::shared_ptr<AssetManager> srcMng){ m_srcMng = srcMng; }
 
 	void update();
 	void changeState(StateType stateType);
 
 private:
-	IState *m_currentState = NULL;
-	std::unordered_map<StateType, IState *> m_states;
-	const AssetManager *m_srcMng = NULL;
+	std::unique_ptr<IState> m_currentState{nullptr};
+	std::unordered_map<StateType, std::unique_ptr<IState>> m_states;
+	std::shared_ptr<AssetManager> m_srcMng{nullptr};
 };
 
 #endif

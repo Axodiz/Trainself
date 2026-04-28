@@ -1,8 +1,8 @@
 #include <loadSourceManager.h>
 
-const AssetManager *loadSourceManager()
+std::shared_ptr<AssetManager> loadSourceManager()
 {
-	AssetManager *srcMng = new AssetManager(&ImGui::GetIO());
+	auto srcMng = std::make_shared<AssetManager>(&ImGui::GetIO());
 
 	float fontSizeDefault = 16.0f;
 	float fontSizeLarge = fontSizeDefault * 4;

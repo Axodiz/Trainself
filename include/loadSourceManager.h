@@ -1,8 +1,9 @@
 #ifndef LOADSOURCEMANAGER_H
 #define LOADSOURCEMANAGER_H
 
+#include <memory>
 #include <AssetManager.h>
 
-const AssetManager *loadSourceManager();
+std::shared_ptr<AssetManager> loadSourceManager();
 
 #endif

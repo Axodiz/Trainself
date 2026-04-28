@@ -1,8 +1,8 @@
 #include <EditorState.h>
 
-void EditorState::loadState(StateType newType, const AssetManager *mng)
+void EditorState::loadState(StateType newType, std::shared_ptr<AssetManager> srcMng)
 {
-	loadSrcMng(mng);
+	loadSrcMng(srcMng);
 	m_titleFont = m_srcMng->getFont("ProggyClean_Large");
 	m_btnFont = m_srcMng->getFont("ProggyClean_Default");
 	m_fontDefault= m_srcMng->getFont("ProggyClean_Default");

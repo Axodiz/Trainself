@@ -1,8 +1,8 @@
 #include <MainState.h>
 
-void MainState::loadState(StateType newType, const AssetManager *mng)
+void MainState::loadState(StateType newType, std::shared_ptr<AssetManager> srcMng)
 {
-	loadSrcMng(mng);
+	loadSrcMng(srcMng);
 	m_titleFont = m_srcMng->getFont("ProggyClean_Large");
 	m_fontDefault= m_srcMng->getFont("ProggyClean_Default");
 	m_stateType= newType;
