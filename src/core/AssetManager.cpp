@@ -1,9 +1,10 @@
 #include <AssetManager.h>
+#include <iostream>
 
 ImFont *AssetManager::getFont(const std::string &name) const
 {
-	auto it = fonts.find(name);
-	if(it != fonts.end()){
+	auto it = m_fonts.find(name);
+	if(it != m_fonts.end()){
 		return it->second;
 	}
 	std::cout << "There is no font with this name" << std::endl;
@@ -12,9 +13,9 @@ ImFont *AssetManager::getFont(const std::string &name) const
 
 void AssetManager::loadFont(ImFont *font, std::string name)
 {
-	auto it = fonts.find(name);
-	if(it == fonts.end())
-		fonts[name] = font;
+	auto it = m_fonts.find(name);
+	if(it == m_fonts.end())
+		m_fonts[name] = font;
 	else
 		std::cout << "Name is already exists" << std::endl;
 }

@@ -5,15 +5,14 @@
 #include <imgui_internal.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
-#include <GLFW/glfw3.h>
 
-#include <iostream>
+#include <GLFW/glfw3.h>
 
 namespace UI
 {
 	// utilities functions
 	void loadUI(GLFWwindow *window);
-	void newFrame();
+	void createNewFrame();
 	void render();
 	void shutdownUI();
 
@@ -24,9 +23,9 @@ namespace UI
 		   	ImFont *font,
 		   	const ImVec2 position,
 			const ImVec2 &size,
-		   	const ImU32 color_bg,
-			const ImU32 color_hover,
-			const ImU32 color_text
+		   	const ImU32 colorBG,
+			const ImU32 colorHover,
+			const ImU32 colorText
 			);
 }
 

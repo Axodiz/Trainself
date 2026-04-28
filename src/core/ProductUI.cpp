@@ -1,4 +1,5 @@
 #include <ProductUI.h>
+#include <iostream>
 
 void UI::loadUI(GLFWwindow *window)
 {
@@ -18,7 +19,7 @@ void UI::loadUI(GLFWwindow *window)
 	}
 }
 
-void UI::newFrame()
+void UI::createNewFrame()
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -64,9 +65,9 @@ bool UI::drawButton(
 	   	ImFont *font,
 	   	const ImVec2 position,
 		const ImVec2 &size,
-	   	const ImU32 color_bg,
-		const ImU32 color_hover,
-		const ImU32 color_text
+	   	const ImU32 colorBG,
+		const ImU32 colorHover,
+		const ImU32 colorText
 		)
 {
 	ImGuiViewport *viewport = ImGui::GetMainViewport();
@@ -85,7 +86,7 @@ bool UI::drawButton(
 
 	ImDrawList *drawList = ImGui::GetBackgroundDrawList();
 
-	ImU32 bg = hovered ? color_hover : color_bg;
+	ImU32 bg = hovered ? colorHover : colorBG;
 	drawList->AddRectFilled(minPos, maxPos, bg, 6.0f);
 
 
@@ -95,7 +96,7 @@ bool UI::drawButton(
 	float textXPos = windowCenter.x - textSize.x / 2 + windowSize.x / 2 * position.x;
 	float textYPos = windowCenter.y - textSize.y / 2 + windowSize.y / 2 * position.y;
 
-	drawList->AddText(ImVec2(textXPos, textYPos), color_text, text);
+	drawList->AddText(ImVec2(textXPos, textYPos), colorText, text);
 
 	ImGui::PopFont();
 

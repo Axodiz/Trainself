@@ -4,31 +4,31 @@
 #include <AssetManager.h>
 #include <ProductUI.h>
 
-enum stateType {
+enum StateType {
 	STATE_MAIN,
 	STATE_EDITOR,
-	DEFAULT
+	STATE_DEFAULT
 };
 
 class IState
 {
 public:
-	virtual void loadState(stateType new_type, const AssetManager *mng) = 0;
+	virtual void loadState(StateType newType, const AssetManager *mng) = 0;
 	virtual void update() = 0;
 
-	void reset_isChange() { is_change = false; }
+	void resetChanged() { m_changed = false; }
 
-	bool get_isChange() const { return is_change; }
-	stateType getType() const { return type; }
-	stateType getChangeType() const { return changeState; }
+	bool getChanged() const { return m_changed; }
+	StateType getType() const { return m_stateType; }
+	StateType getChangeType() const { return m_stateChange; }
 
 protected:
-	void loadSrcMng(const AssetManager *mng) { srcMng = mng; }
+	void loadSrcMng(const AssetManager *srcMng) { m_srcMng = srcMng; }
 
-	stateType type = DEFAULT;
-	const AssetManager *srcMng = NULL;
-	bool is_change = false;
-	stateType changeState = DEFAULT;
+	StateType m_stateType = STATE_DEFAULT;
+	const AssetManager *m_srcMng = NULL;
+	bool m_changed = false;
+	StateType m_stateChange = STATE_DEFAULT;
 };
 
 #endif

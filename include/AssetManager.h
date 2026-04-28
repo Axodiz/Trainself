@@ -1,11 +1,10 @@
 #ifndef ASSETMANAGER_H
 #define ASSETMANAGER_H
 
-#include <imgui.h>
-
 #include <string>
 #include <unordered_map>
-#include <iostream>
+
+#include <imgui.h>
 
 class AssetManager
 {
@@ -15,7 +14,7 @@ public:
 	void loadFont(ImFont *font, std::string name);
 
 private:
-	std::unordered_map<std::string, ImFont *> fonts;
+	std::unordered_map<std::string, ImFont *> m_fonts;
 };
 
 #endif

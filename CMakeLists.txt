@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.15)
 
 set(projectName trainself)
-set(appName trainself.exe)
+set(appName trainself)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(${projectName})

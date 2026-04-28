@@ -1,26 +1,27 @@
 #include <StateMachine.h>
+#include <iostream>
 
 void StateMachine::loadFont(ImFont *font, std::string name)
 {
-	srcMng.loadFont(font, name);
+	m_srcMng.loadFont(font, name);
 }
 
 void StateMachine::update()
 {
-	currentState->update();
-	if(currentState->get_isChange()){
-		currentState->reset_isChange();
-		change(currentState->getChangeType());
+	m_currentState->update();
+	if(m_currentState->getChanged()){
+		m_currentState->resetChanged();
+		changeState(m_currentState->getChangeType());
 	}
 }
 
-void StateMachine::change(stateType type)
+void StateMachine::changeState(StateType stateType)
 {
-	auto it = states.find(type);
-	if(it == states.end()){
+	auto it = m_states.find(stateType);
+	if(it == m_states.end()){
 
 		IState *newState;
-		switch(type)
+		switch(stateType)
 		{
 		case STATE_MAIN:
 			newState = new MainState();
@@ -28,16 +29,16 @@ void StateMachine::change(stateType type)
 		case STATE_EDITOR:
 			newState = new EditorState();
 			break;
-		case DEFAULT:
+		case STATE_DEFAULT:
 		default:
 			newState = NULL;
 			std::cout << "STATE_MACHINE : CHANGE DEFAULT" << std::endl;
 			break;
 		}
 		
-		newState->loadState(type, &srcMng);
-		states[type] = newState;
+		newState->loadState(stateType, &m_srcMng);
+		m_states[stateType] = newState;
 	}
 
-	currentState = states[type];
+	m_currentState = m_states[stateType];
 }

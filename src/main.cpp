@@ -1,13 +1,15 @@
+#include <iostream>
+
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <StateMachine.h>
 #include <ProductUI.h>
 
-#include <iostream>
 
 int main(){
 
@@ -44,12 +46,12 @@ int main(){
 
 	ImGui::StyleColorsDark();
 
-	StateMachine state_machine;
-	state_machine.loadFont(fontTitle, "ProggyClean_Large");
-	state_machine.loadFont(fontDefault, "ProggyClean_Default");
+	StateMachine fsm;
+	fsm.loadFont(fontTitle, "ProggyClean_Large");
+	fsm.loadFont(fontDefault, "ProggyClean_Default");
 
-	state_machine.change(STATE_EDITOR);
-	state_machine.change(STATE_MAIN);
+	fsm.changeState(STATE_EDITOR);
+	fsm.changeState(STATE_MAIN);
 
 	// render loop
 	while(!glfwWindowShouldClose(window)){
@@ -60,15 +62,15 @@ int main(){
 			glfwSetWindowShouldClose(window, true);
 		}
 
-		UI::newFrame();
+		UI::createNewFrame();
 
 		// load application state
-		state_machine.update();
+		fsm.update();
 
 		// draw interface and events
-		int display_w, display_h;
-		glfwGetFramebufferSize(window, &display_w, &display_h);
-		glViewport(0, 0, display_w, display_h);
+		int displayWidth, displayHeight;
+		glfwGetFramebufferSize(window, &displayWidth, &displayHeight);
+		glViewport(0, 0, displayWidth, displayHeight);
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
