@@ -4,9 +4,9 @@
 #include <unordered_map>
 #include <memory>
 
-#include <IState.h>
-#include <MainState.h>
-#include <EditorState.h>
+#include <states/IState.h>
+#include <states/MainState.h>
+#include <states/EditorState.h>
 
 class StateMachine
 {

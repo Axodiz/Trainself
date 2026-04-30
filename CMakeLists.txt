@@ -7,6 +7,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(${projectName})
 
 option(ENABLE_CONFIG_WINDOW "add configuration window in application" ON)
+option(ENABLE_TESTS "build tests" ON)
+
 
 if(ENABLE_CONFIG_WINDOW)
 	add_compile_definitions(CONFIG_WINDOW)
@@ -15,18 +17,30 @@ else()
 	message("configuration window: DISABLED")
 endif()
 
+if(ENABLE_TESTS)
+	add_compile_definitions(DEBUG_TESTS)
+	message("build tests: ENABLED")
+else()
+	message("build tests: DISABLED")
+endif()
+
+
 if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
     message(FATAL_ERROR
 		"Submodules are not initialized. Run: git submodule update --init --recursive"
 	)
 endif()
 
+
 add_subdirectory(external/glfw)
 add_subdirectory(external/glad)
 add_subdirectory(external/imgui)
+add_subdirectory(external/googletest)
+
+enable_testing()
+add_subdirectory(tests)
 
 set(SOURCES
-	src/main.cpp
 	src/loadSourceManager.cpp
 	src/core/AssetManager.cpp
 	src/core/ProductUI.cpp
@@ -35,7 +49,25 @@ set(SOURCES
 	src/states/EditorState.cpp
 )
 
-add_executable(${appName} ${SOURCES})
+add_executable(${appName} ${SOURCES} src/main.cpp)
+
+set(EXTERN_LIBS
+	glfw
+	glad
+	imgui
+)
+
+add_library(srcLib STATIC ${SOURCES})
+
+target_include_directories(srcLib
+	PUBLIC
+		${CMAKE_SOURCE_DIR}/include
+	PRIVATE
+		${CMAKE_SOURCE_DIR}/src
+)
+
+target_link_libraries(srcLib PUBLIC	${EXTERN_LIBS})
+
 
 if(
 	(CMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR
@@ -46,20 +78,15 @@ target_compile_options(${appName} PRIVATE -Wall -g)
 
 endif()
 
-target_link_libraries(${appName}
-	PRIVATE
-		glfw
-		glad
-		imgui
-)
+
+target_link_libraries(${appName} PRIVATE ${EXTERN_LIBS})
 
 target_include_directories(${appName}
    	PRIVATE
    		include
-		include/states
-		include/core
 		fonts
 )
+
 
 add_custom_command(TARGET ${appName} POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_directory

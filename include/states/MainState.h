@@ -2,7 +2,7 @@
 #define MAINSTATE_H
 
 #include <imgui.h>
-#include <IState.h>
+#include <states/IState.h>
 
 class MainState : public IState
 {

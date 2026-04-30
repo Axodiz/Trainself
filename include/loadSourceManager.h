@@ -2,7 +2,7 @@
 #define LOADSOURCEMANAGER_H
 
 #include <memory>
-#include <AssetManager.h>
+#include <core/AssetManager.h>
 
 std::shared_ptr<AssetManager> loadSourceManager();
 

@@ -7,8 +7,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <StateMachine.h>
-#include <ProductUI.h>
+#include <core/StateMachine.h>
+#include <core/ProductUI.h>
 #include <loadSourceManager.h>
 
 

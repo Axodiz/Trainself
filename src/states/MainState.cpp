@@ -1,4 +1,4 @@
-#include <MainState.h>
+#include <states/MainState.h>
 
 void MainState::loadState(StateType newType, std::shared_ptr<AssetManager> srcMng)
 {

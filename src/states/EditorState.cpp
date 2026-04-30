@@ -1,4 +1,4 @@
-#include <EditorState.h>
+#include <states/EditorState.h>
 
 void EditorState::loadState(StateType newType, std::shared_ptr<AssetManager> srcMng)
 {

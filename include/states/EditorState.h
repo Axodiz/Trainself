@@ -2,7 +2,7 @@
 #define EDITORSTATE_H
 
 #include <imgui.h>
-#include <IState.h>
+#include <states/IState.h>
 
 class EditorState : public IState
 {
