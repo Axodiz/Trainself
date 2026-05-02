@@ -3,6 +3,11 @@
 
 void StateMachine::update()
 {
+	if(!m_currentState){
+		std::cout << "m_currentState hasn't been initialized" << std::endl;
+		return;
+	}
+
 	m_currentState->update();
 	if(m_currentState->getChanged()){
 		m_currentState->resetChanged();
@@ -12,6 +17,10 @@ void StateMachine::update()
 
 void StateMachine::changeState(StateType stateType)
 {
+	if(stateType == STATE_DEFAULT){
+		std::cout << "STATE_MACHINE : CHANGE DEFAULT" << std::endl;
+		return;
+	}
 	if(m_currentState){
 		m_states[m_currentState->getType()] = std::move(m_currentState);
 	}
@@ -23,10 +32,10 @@ void StateMachine::changeState(StateType stateType)
 		switch(stateType)
 		{
 		case STATE_MAIN:
-			newState = std::make_unique<MainState>();
+			newState = std::make_unique<MainState>(STATE_MAIN);
 			break;
 		case STATE_EDITOR:
-			newState = std::make_unique<EditorState>();
+			newState = std::make_unique<EditorState>(STATE_EDITOR);
 			break;
 		case STATE_DEFAULT:
 		default:
@@ -34,7 +43,6 @@ void StateMachine::changeState(StateType stateType)
 			break;
 		}
 		
-		newState->loadState(stateType, m_srcMng);
 		m_states[stateType] = std::move(newState);
 	}
 

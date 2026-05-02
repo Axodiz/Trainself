@@ -35,10 +35,7 @@ endif()
 add_subdirectory(external/glfw)
 add_subdirectory(external/glad)
 add_subdirectory(external/imgui)
-add_subdirectory(external/googletest)
 
-enable_testing()
-add_subdirectory(tests)
 
 set(SOURCES
 	src/loadSourceManager.cpp
@@ -57,17 +54,14 @@ set(EXTERN_LIBS
 	imgui
 )
 
-add_library(srcLib STATIC ${SOURCES})
 
-target_include_directories(srcLib
-	PUBLIC
-		${CMAKE_SOURCE_DIR}/include
-	PRIVATE
-		${CMAKE_SOURCE_DIR}/src
+target_link_libraries(${appName} PRIVATE ${EXTERN_LIBS})
+
+target_include_directories(${appName}
+   	PRIVATE
+   		include
+		fonts
 )
-
-target_link_libraries(srcLib PUBLIC	${EXTERN_LIBS})
-
 
 if(
 	(CMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR
@@ -79,13 +73,23 @@ target_compile_options(${appName} PRIVATE -Wall -g)
 endif()
 
 
-target_link_libraries(${appName} PRIVATE ${EXTERN_LIBS})
+if(ENABLE_TESTS)
+	add_subdirectory(external/googletest)
 
-target_include_directories(${appName}
-   	PRIVATE
-   		include
-		fonts
-)
+	add_library(srcLib STATIC ${SOURCES})
+
+	target_include_directories(srcLib
+		PUBLIC
+			${CMAKE_SOURCE_DIR}/include
+		PRIVATE
+			${CMAKE_SOURCE_DIR}/src
+	)
+
+	target_link_libraries(srcLib PUBLIC	${EXTERN_LIBS})
+
+	enable_testing()
+	add_subdirectory(tests)
+endif()
 
 
 add_custom_command(TARGET ${appName} POST_BUILD

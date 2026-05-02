@@ -1,36 +1,33 @@
 #ifndef MAINSTATE_H
 #define MAINSTATE_H
 
-#include <imgui.h>
 #include <states/IState.h>
 
 class MainState : public IState
 {
 public:
-	void loadState(StateType newType, std::shared_ptr<AssetManager> srcMng) override;
+	using IState::IState;
 	void update() override;
 	
 private:
 	// menu parameters
 	// title
 	const char *m_titleText = "TRAINSELF";
-	ImFont *m_titleFont = NULL;
-	ImU32 m_titleColor = IM_COL32(255, 255, 255, 255);
+	const char *m_titleFont = "ProggyClean_Large";
+	struct UI::Color m_titleColor {255, 255, 255, 255};
 	float m_titleXPos = 0.0f;
 	float m_titleYPos = -0.75f;
 
 	// buttons
 	const char *m_btnText = "to editor";
-	ImFont *m_btnFont = NULL;
+	const char *m_btnFont = "ProggyClean_Default";
 	float m_btnXPos = 0.0f;
 	float m_btnYPos = 0.0f;
 	int m_btnXSize = 120;
 	int m_btnYSize = 40;
-	ImU32 m_btnColorBG = IM_COL32(63, 255, 63, 255);
-	ImU32 m_btnColorHover = IM_COL32(127, 255, 127, 255);
-	ImU32 m_btnColorText = IM_COL32(255, 255, 255, 255);
-
-	ImFont *m_fontDefault = NULL;
+	struct UI::Color m_btnColorBG {63, 255, 63, 255};
+	struct UI::Color m_btnColorHover {127, 255, 127, 255};
+	struct UI::Color m_btnColorText {255, 255, 255, 255};
 };
 
 #endif

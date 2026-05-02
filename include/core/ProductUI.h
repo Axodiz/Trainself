@@ -1,6 +1,8 @@
 #ifndef PRODUCTUI_H
 #define PRODUCTUI_H
 
+#include <cstdint>
+
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_impl_opengl3.h>
@@ -10,6 +12,14 @@
 
 namespace UI
 {
+	// utilities structs
+	struct Color {
+		uint8_t r;
+		uint8_t g;
+		uint8_t b;
+		uint8_t a;
+	};
+
 	// utilities functions
 	void loadUI(GLFWwindow *window);
 	void createNewFrame();
@@ -17,15 +27,17 @@ namespace UI
 	void shutdownUI();
 
 	// draw functions
-	void drawLabel(const char *text, ImFont *font, const ImVec2 position, const ImU32 color);
+	void drawLabel(const char *text, const char *font, float XPos, float YPos, struct Color color);
 	bool drawButton(
 			const char *text,
-		   	ImFont *font,
-		   	const ImVec2 position,
-			const ImVec2 &size,
-		   	const ImU32 colorBG,
-			const ImU32 colorHover,
-			const ImU32 colorText
+		   	const char *font,
+			float XPos,
+			float YPos,
+			int XSize,
+			int YSize,
+			struct Color colorBG,
+			struct Color colorHover,
+			struct Color colorText
 			);
 }
 

@@ -9,7 +9,6 @@
 
 #include <core/StateMachine.h>
 #include <core/ProductUI.h>
-#include <loadSourceManager.h>
 
 
 int main(){
@@ -43,7 +42,7 @@ int main(){
 
 	ImGui::StyleColorsDark();
 
-	StateMachine fsm(loadSourceManager());
+	StateMachine fsm;
 
 	fsm.changeState(STATE_EDITOR);
 	fsm.changeState(STATE_MAIN);
