@@ -14,20 +14,26 @@ private:
 	// title
 	const char *m_titleText = "TRAINSELF";
 	const char *m_titleFont = "ProggyClean_Large";
-	struct UI::Color m_titleColor {255, 255, 255, 255};
-	float m_titleXPos = 0.0f;
-	float m_titleYPos = -0.75f;
+	struct UI::Label m_titleLabel {
+		{0.0f, -0.75f}, // pos
+		{255, 255, 255, 255} // color
+	};
 
 	// buttons
 	const char *m_btnText = "to editor";
 	const char *m_btnFont = "ProggyClean_Default";
-	float m_btnXPos = 0.0f;
-	float m_btnYPos = 0.0f;
-	int m_btnXSize = 120;
-	int m_btnYSize = 40;
-	struct UI::Color m_btnColorBG {63, 255, 63, 255};
-	struct UI::Color m_btnColorHover {127, 255, 127, 255};
 	struct UI::Color m_btnColorText {255, 255, 255, 255};
+	struct UI::Btn m_btn {
+		// rect
+		{
+			{63, 255, 63, 255}, // color
+			{0.0f, 0.0f}, // pos
+			{120, 40}, // size
+			20.0f // round
+		},
+		{127, 255, 127, 255}, // hover
+		{255, 255, 255, 255} // text color
+	};
 };
 
 #endif
