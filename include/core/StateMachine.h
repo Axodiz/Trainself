@@ -13,7 +13,13 @@ class StateMachine
 public:
 	StateMachine() = default;
 
+	// update current state
+	// if current state == null; do nothing
+	// if current state set changed flag; change to another state
 	void update();
+
+	// change current state to stateType
+	// if stateType == STATE_DEFAULT; do nothing
 	void changeState(StateType stateType);
 
 #ifdef DEBUG_TESTS

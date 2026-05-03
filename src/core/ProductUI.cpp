@@ -10,7 +10,6 @@ static std::shared_ptr<AssetManager> srcMng = nullptr;
 
 void UI::loadUI(GLFWwindow *window)
 {
-	// load interface library
 	IMGUI_CHECKVERSION();
 
 	ImGui::CreateContext();

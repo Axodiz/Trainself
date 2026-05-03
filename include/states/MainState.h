@@ -10,7 +10,7 @@ public:
 	void update() override;
 	
 private:
-	// menu parameters
+	// menu elements
 	// title
 	const char *m_titleText = "TRAINSELF";
 	const char *m_titleFont = "ProggyClean_Large";

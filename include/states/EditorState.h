@@ -10,7 +10,7 @@ public:
 	void update() override;
 	
 private:
-	// menu parameters
+	// editor elements 
 	// title
 	const char *m_titleText = "EDITOR";
 	const char *m_titleFont = "ProggyClean_Large";

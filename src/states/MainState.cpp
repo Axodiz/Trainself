@@ -16,6 +16,7 @@ void MainState::update()
 //	ImGui::PopFont();
 //#endif
 
+	// draw main interface
 	UI::drawLabel(m_titleText, m_titleFont, m_titleXPos, m_titleYPos, m_titleColor);
 
 	if(UI::drawButton(

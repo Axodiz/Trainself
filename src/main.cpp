@@ -15,10 +15,10 @@ int main(){
 
 	glfwInit();
 
-	// get current monitor parameters and set their to window
 	GLFWmonitor *monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode *mode = glfwGetVideoMode(monitor);
 
+	// set to monitor parameters to window
 	glfwWindowHint(GLFW_RED_BITS, mode->redBits);
 	glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
 	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
@@ -58,7 +58,6 @@ int main(){
 
 		UI::createNewFrame();
 
-		// load application state
 		fsm.update();
 
 		// draw interface and events

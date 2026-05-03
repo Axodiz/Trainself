@@ -16,6 +16,7 @@ void EditorState::update()
 //	ImGui::PopFont();
 //#endif
 
+	// draw main state
 	UI::drawLabel(m_titleText, m_titleFont, m_titleXPos, m_titleYPos, m_titleColor);
 
 	if(UI::drawButton(
